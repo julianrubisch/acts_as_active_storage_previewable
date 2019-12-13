@@ -4,5 +4,4 @@ require "acts_as_active_storage_previewable/railtie"
 require "acts_as_active_storage_previewable/null_attachment"
 
 module ActsAsActiveStoragePreviewable
-  extend ActiveSupport::Concern
 end

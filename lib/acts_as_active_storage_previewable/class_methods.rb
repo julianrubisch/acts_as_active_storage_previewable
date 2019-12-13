@@ -1,10 +1,15 @@
 module ActsAsActiveStoragePreviewable
   module ClassMethods
-    def acts_as_active_storage_previewable_on(fields)
-      acts_as_active_storage_previewable(fields)
+    def acts_as_active_storage_previewable_on(*fields, **kw_args)
+      acts_as_active_storage_previewable(fields, kw_args)
     end
 
-    def acts_as_active_storage_previewable(fields = {})
+    def acts_as_active_storage_previewable(fields = {}, **kw_args)
+      @aaasp_args = kw_args.freeze
+      class << self
+        attr_accessor :aaasp_args
+      end
+
       if fields.empty?
         define_method :method_missing do |method_name, *args, &block|
           if /(.*)_shim\Z/.match?(method_name)
@@ -30,6 +35,12 @@ module ActsAsActiveStoragePreviewable
           end
         end
       else
+        @aaasp_fields = Array(fields).freeze  
+
+        class << self
+          attr_accessor :aaasp_fields
+        end
+
         Array(fields).each do |attachment_key|
           define_method :"#{attachment_key}_shim" do |*args|
             if public_send(attachment_key).attached?
