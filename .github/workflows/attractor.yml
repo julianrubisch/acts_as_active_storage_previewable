@@ -20,7 +20,7 @@ jobs:
       with:
         version: 'latest'
         bundle: 'false'
-        file_prefix: 'lib'
+        file_prefix: ''
         javascript: 'false'
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
