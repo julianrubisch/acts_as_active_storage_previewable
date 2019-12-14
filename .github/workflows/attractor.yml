@@ -13,13 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with: 
+        fetch-depth: '0'
     - name: Run Attractor
       uses: julianrubisch/attractor-action@add-base-setup
       with:
         version: 'latest'
         bundle: 'false'
         file_prefix: 'lib'
-        javascript: 'true'
+        javascript: 'false'
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       if: success()
