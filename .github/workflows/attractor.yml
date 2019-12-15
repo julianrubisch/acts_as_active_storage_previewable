@@ -20,6 +20,7 @@ jobs:
       with:
         version: 'latest'
         bundle: 'false'
+        file-prefix: '' 
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       if: success()
